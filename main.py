@@ -1,14 +1,24 @@
 from fastapi import FastAPI
 from sqlalchemy.orm import Session
+from starlette.responses import RedirectResponse
 
-from . import models, schemas
-from .database import SessionLocal, db_engine
+import models
+from database import SessionLocal, db_engine
 
 models.Base.metadata.create_all(bind=db_engine)
 
 app = FastAPI(
     title="Uganda Covid-19 REST API",  
 )
+
+# @app.on_event("startup")
+# async def startup():
+#     #await db_engine.connect()
+
+
+# @app.on_event("shutdown")
+# async def shutdown():
+#     #await database.disconnect()
 
 #Dependency
 def get_db():
@@ -19,6 +29,6 @@ def get_db():
         db_engine.close()    
 
 
-@app.get('/')
-async def root():
-    return {"Message": "This proves that it works as expected"}
+@app.get("/", include_in_schema=False)
+async def index():
+    return RedirectResponse("/docs")

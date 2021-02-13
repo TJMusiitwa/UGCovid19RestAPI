@@ -1,10 +1,11 @@
 import datetime
 from sqlalchemy import Column, String,Integer, DateTime
 from sqlalchemy.sql.schema import FetchedValue
-from .database import Base
+from database import Base,metadata
 
 class Summary(Base):
     __tablename__ = 'summary'
+    metadata
 
     id = Column(Integer, primary_key=True,default=1)
     cases = Column(Integer, nullable=False)
@@ -19,6 +20,7 @@ class Summary(Base):
 
 class Timeline(Base):
     __tablename__ = "timeline"
+    metadata
 
     createdAt = Column(DateTime, unique=True, nullable=True,index=True,primary_key=True)
     cases = Column(Integer, nullable=False)
@@ -27,6 +29,7 @@ class Timeline(Base):
 
 class HospitalCases(Base):
     __tablename__ = "hospitalCases"
+    metadata
 
     hospitalName = Column('hospital',String,unique=True,index=True,primary_key=True,nullable=False)
     admissions = Column(Integer, nullable=False)
@@ -39,6 +42,7 @@ def calcTotal(context):
 
 class AgeGender(Base):
     __tablename__ = "age_gender"
+    metadata
 
     ageGroup = Column(String)
     females = Column(Integer)
@@ -48,6 +52,7 @@ class AgeGender(Base):
 
 class DistrictCases(Base):
     __tablename__ = 'district_cases'
+    metadata
 
     districtName = Column('district',String,unique=True,index=True,nullable=False)
     region = Column(String,index=True)

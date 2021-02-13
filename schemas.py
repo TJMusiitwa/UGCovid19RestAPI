@@ -33,6 +33,11 @@ class HospitalCases(BaseModel):
 class HospitalCasesCreate(HospitalCases):
     pass
 
+class HospitalCasesUpdate(HospitalCases):
+    admissions:int
+    discharge:int
+    deaths:int
+
 class AgeGender(BaseModel):
     ageGroup:str
     females:int
@@ -42,6 +47,15 @@ class AgeGender(BaseModel):
 
     class Config:
         orm_mode = True
+
+class AgeGenderCreate(AgeGender):
+    ageGroup:str
+    females:int
+    males:int
+
+class AgeGenderUpdate(AgeGender):
+    females:int
+    males:int
 
 class DistrictCases(BaseModel):
     districtName:str
@@ -53,3 +67,15 @@ class DistrictCases(BaseModel):
 
     class Config:
         orm_mode = True
+
+class DistrictCreate(DistrictCases):
+    districtName:str
+    region:str
+    cases:int
+    deaths:int
+    recoveries:int
+
+class DistrictUpdate(DistrictCases):
+    cases:int
+    deaths:int
+    recoveries:int
